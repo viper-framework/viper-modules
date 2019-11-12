@@ -9,8 +9,6 @@ import tempfile
 import time
 from io import BytesIO, open
 
-from viper.common.constants import VIPER_ROOT
-
 try:
     import pefile
     import peutils

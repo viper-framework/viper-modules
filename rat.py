@@ -9,7 +9,6 @@ import viper
 from viper.common.out import bold
 from viper.common.abstracts import Module
 from viper.core.session import __sessions__
-from viper.common.constants import VIPER_ROOT
 
 try:
     from scandir import walk
