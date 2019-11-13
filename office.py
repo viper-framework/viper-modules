@@ -43,7 +43,7 @@ class Office(Module):
     def __init__(self):
         super(Office, self).__init__()
         self.parser.add_argument("-m", "--meta", action="store_true", help="Get the metadata")
-        self.parser.add_argument("-o", "--ole_id", action="store_true", help="Get the OLE information")
+        self.parser.add_argument("-o", "--oleid", action="store_true", help="Get the OLE information")
         self.parser.add_argument("-s", "--streams", action="store_true", help="Show the document streams")
         self.parser.add_argument("-e", "--export", metavar="dump_path", help="Export all objects")
         self.parser.add_argument("-v", "--vba", action="store_true", help="Analyse Macro Code")
