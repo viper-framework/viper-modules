@@ -42,6 +42,7 @@ class PE(Module):
     cmd = 'pe'
     description = 'Extract information from PE32 headers'
     authors = ['nex', 'Statixs']
+    categories = ["windows"]
 
     def __init__(self):
         super(PE, self).__init__()

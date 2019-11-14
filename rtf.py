@@ -24,6 +24,7 @@ class Rtf(Module):
     cmd = 'rtf'
     description = 'RTF Parser'
     authors = ['xorhex']
+    categories = ["document"]
 
     def __init__(self):
         super(Rtf, self).__init__()

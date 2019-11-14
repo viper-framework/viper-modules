@@ -20,6 +20,7 @@ class Lief(Module):
     cmd = "lief"
     description = "Parse and extract information from ELF, PE, MachO, DEX, OAT, ART and VDEX formats"
     authors = ["Jordan Samhi"]
+    categories = ["windows", "osx", "linux", "android"]
 
     def __init__(self):
         super(Lief, self).__init__()

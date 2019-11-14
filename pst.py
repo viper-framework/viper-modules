@@ -23,6 +23,7 @@ class PST(Module):
     cmd = 'pst'
     description = 'Process PST Files for Attachment'
     authors = ['Kevin Breen']
+    categories = ["email"]
 
     def __init__(self):
         super(PST, self).__init__()

@@ -17,6 +17,7 @@ class Macho(Module):
     cmd = 'macho'
     description = 'Get Macho OSX Headers'
     authors = ['Alexander J']
+    categories = ["osx"]
 
     def __init__(self):
         super(Macho, self).__init__()

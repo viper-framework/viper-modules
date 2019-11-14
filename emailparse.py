@@ -20,6 +20,7 @@ class EmailParse(Module):
     cmd = 'email'
     description = 'Parse eml and msg email files'
     authors = ['Kevin Breen', 'nex']
+    categories = ["email"]
 
     def __init__(self):
         super(EmailParse, self).__init__()

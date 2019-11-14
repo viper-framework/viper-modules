@@ -19,6 +19,7 @@ class PDF(Module):
     cmd = 'pdf'
     description = 'Parse and analyze PDF documents'
     authors = ['Kevin Breen', 'nex']
+    categories = ["document"]
 
     def __init__(self):
         super(PDF, self).__init__()

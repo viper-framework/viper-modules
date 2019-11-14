@@ -39,6 +39,7 @@ class Office(Module):
     cmd = "office"
     description = "Office Document Parser"
     authors = ["Kevin Breen", "nex"]
+    categories = ["document"]
 
     def __init__(self):
         super(Office, self).__init__()

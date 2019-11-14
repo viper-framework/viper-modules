@@ -29,6 +29,7 @@ class ELF(Module):
     cmd = 'elf'
     description = 'Extract information from ELF headers'
     authors = ['emdel']
+    categories = ["linux"]
 
     def __init__(self):
         super(ELF, self).__init__()

@@ -20,6 +20,7 @@ class AndroidPackage(Module):
     cmd = 'apk'
     description = 'Parse Android Applications'
     authors = ['Kevin Breen']
+    categories = ["android"]
 
     def __init__(self):
         super(AndroidPackage, self).__init__()

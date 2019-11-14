@@ -15,6 +15,7 @@ class Snoopdroid(Module):
     cmd = "snoopdroid"
     description = "Download applications from Android phone"
     authors = ["nex"]
+    categories = ["android"]
 
     def __init__(self):
         super(Snoopdroid, self).__init__()
