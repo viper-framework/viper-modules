@@ -93,4 +93,4 @@ ocrd-pyexiftool==0.2.0
 lief==0.10.0.dev0 ; python_version >= '3.5'
 
 # Snoopdroid module
-snoopdroid==2.2
+snoopdroid==2.1
