@@ -53,6 +53,6 @@ class Snoopdroid(Module):
             self._get_packages()
         elif self.args.all:
             self._download_all()
-        elif self.packages:
+        elif self.args.packages:
             # TODO
             self.log("warning", "Not implemented yet")
