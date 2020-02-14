@@ -1,8 +1,8 @@
-[submodule "Mach-O"]
-    path = pymacho_helper
-    url = https://github.com/viper-framework/Mach-O.git
-    branch = master
 [submodule "pdftools"]
     path = pdftools
     url = https://github.com/viper-framework/pdftools.git
+    branch = master
+[submodule "pymacho_helper"]
+    path = pymacho_helper
+    url = https://github.com/viper-framework/Mach-O.git
     branch = master
