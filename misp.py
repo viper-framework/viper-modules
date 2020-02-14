@@ -6,6 +6,7 @@ import argparse
 import textwrap
 import os
 import logging
+from os.path import expanduser
 
 try:
     from pymisp import ExpandedPyMISP, PyMISPError, MISPEvent
@@ -26,7 +27,6 @@ from viper.core.session import __sessions__
 from viper.core.project import __project__
 from viper.core.storage import get_sample_path
 from viper.common.objects import MispEvent
-from viper.common.constants import VIPER_ROOT
 from viper.core.config import __config__
 
 log = logging.getLogger('viper')
@@ -430,7 +430,7 @@ class MISP(Module):
         if not ok:
             self.log('error', data)
             return
-        rule_path = os.path.join(VIPER_ROOT, 'data/yara', self.args.event + '.yara')
+        rule_path = os.path.join(expanduser("~"), ".viper", 'data/yara', self.args.event + '.yara')
         if os.path.exists(rule_path):
             self.log('error', 'File {} already exists.'.format(rule_path))
             return
