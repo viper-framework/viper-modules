@@ -49,6 +49,9 @@ idna==2.9
 ipaddress==1.0.23
 pycparser==2.20
 
+# For pehasher
+bitstring==3.1.6
+
 # PSSL Module
 pypssl==2.1
 
