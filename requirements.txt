@@ -10,7 +10,7 @@ pyclamd==0.4.0
 pypdns==1.4.1
 
 # ELF Module
-pyelftools==0.25
+pyelftools==0.26
 
 # Email module
 dnspython==1.16.0
