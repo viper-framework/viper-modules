@@ -83,7 +83,7 @@ ScrapySplashWrapper @ git+https://github.com/viper-framework/ScrapySplashWrapper
 verify-sigs @ git+https://github.com/sebdraven/verify-sigs.git#egg=verify-sigs
 
 # Office module
-oletools==0.54.1
+oletools==0.55.1
 
 # MISP
 PyTaxonomies @ git+https://github.com/MISP/PyTaxonomies.git#egg=PyTaxonomies
