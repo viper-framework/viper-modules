@@ -39,7 +39,7 @@ packaging==19.0
 pefile==2019.4.18
 
 # PE module (verify sigs)
-# SEE: bitstring in requirements-core.txt
+bitstring==3.1.6
 pyasn1==0.4.6
 pyopenssl==19.0.0
 cryptography==2.6.1
