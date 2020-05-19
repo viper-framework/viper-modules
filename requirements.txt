@@ -32,7 +32,7 @@ jsonschema==3.0.1
 # Office module
 olefile==0.46
 xxxswf @ git+https://github.com/viper-framework/xxxswf.git@9188316eb7a179326d99bfde9fe0184bb3cee6a3#egg=xxxswf
-pyparsing==2.4.0
+pyparsing==2.4.7
 packaging==19.0
 
 # PE module
