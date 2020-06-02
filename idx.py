@@ -173,7 +173,7 @@ class IDX(Module):
                 sec4_len = struct.unpack('>i', data.read(4))[0]
                 sec5_len = struct.unpack('>i', data.read(4))[0]
 
-                blacklist_timestamp = struct.unpack('>q', data.read(8))[0] / 1000
+                blocklist_timestamp = struct.unpack('>q', data.read(8))[0] / 1000
                 cert_expiration_date = struct.unpack('>q', data.read(8))[0] / 1000
 
                 # Not used, keep
@@ -188,7 +188,7 @@ class IDX(Module):
                 if sec5_len:
                     sec_one.append(['Section 5 length', sec5_len])
                 if expiration_date:
-                    sec_one.append(['Blacklist Expiration date', time.strftime('%a, %d %b %Y %X GMT', time.gmtime(blacklist_timestamp))])
+                    sec_one.append(['Blocklist Expiration date', time.strftime('%a, %d %b %Y %X GMT', time.gmtime(blocklist_timestamp))])
                 if cert_expiration_date:
                     sec_one.append(['Certificate Expiration date', time.strftime('%a, %d %b %Y %X GMT', time.gmtime(cert_expiration_date))])
 
