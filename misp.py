@@ -464,7 +464,7 @@ class MISP(Module):
             self.log('success', "File uploaded successfully")
             if event_id is None:
                 event_id = result['id']
-            full_event = self.misp.get(event_id)
+            full_event = self.misp.get_event(event_id)
             if not self._has_error_message(full_event):
                 return __sessions__.new(misp_event=MispEvent(full_event, self.offline_mode))
 
@@ -504,7 +504,7 @@ class MISP(Module):
             return
         open_session = len(self.args.event) == 1
         for e in self.args.event:
-            event = self.misp.get(e)
+            event = self.misp.get_event(e)
             if not self._has_error_message(event):
                 self._search_local_hashes(event, open_session)
                 self._dump()
@@ -514,7 +514,7 @@ class MISP(Module):
         if self.offline_mode:
             self._dump()
         else:
-            event = self.misp.update(__sessions__.current.misp_event.event)
+            event = self.misp.update_event(__sessions__.current.misp_event.event)
             if not self._has_error_message(event):
                 self.log('success', 'Event {} published.'.format(event['Event']['id']))
                 __sessions__.new(misp_event=MispEvent(event, self.offline_mode))

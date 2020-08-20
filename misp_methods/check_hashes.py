@@ -34,7 +34,7 @@ def _populate(self, event):
         event_id = self._get_eventid()
         if event_id is None:
             return
-        event = self.misp.get(event_id)
+        event = self.misp.get_event(event_id)
         if self._has_error_message(event):
             return
         __sessions__.new(misp_event=MispEvent(event, self.offline_mode))
@@ -83,7 +83,7 @@ def check_hashes(self):
     event_id = self._get_eventid()
     if event_id is None:
         return
-    misp_event = self.misp.get(event_id)
+    misp_event = self.misp.get_event(event_id, pythonify=True)
     if self._has_error_message(misp_event):
         return
 
@@ -91,7 +91,7 @@ def check_hashes(self):
     hashes_expanded = []  # Thoses hashes are known and already processed
     local_samples_hashes = []
     partial_objects = {}
-    for o in misp_event.Object:
+    for o in misp_event.objects:
         if o.name != 'file':
             continue
         if o.has_attributes_by_relation(['md5', 'sha1', 'sha256']):
@@ -137,7 +137,7 @@ def check_hashes(self):
                                                     filename=sample.value.split('|')[0],
                                                     refobj=ref_uuid,
                                                     default_attributes_parameters=sample)
-        misp_event.Object += new_obj
+        misp_event.add_object(new_obj)
         local_samples_hashes += hashes
         # Make sure to query VT for the sha256, even if expanded locally
         hashes_to_expand[hashes[0]] = sample
@@ -148,7 +148,7 @@ def check_hashes(self):
             new_obj, hashes = self._expand_local_sample(pseudofile=a.malware_binary,
                                                         filename=a.value.split('|')[0],
                                                         default_attributes_parameters=a)
-            misp_event.Object += new_obj
+            misp_event.add_object(new_obj)
             local_samples_hashes += hashes
             # Make sure to query VT for the sha256, even if expanded locally
             hashes_to_expand[hashes[0]] = a
@@ -197,7 +197,7 @@ def check_hashes(self):
                 file_object.add_attribute('sha1', value=sha1)
                 file_object.add_attribute('sha256', value=sha256)
                 file_object.add_reference(vt_object.uuid, 'analysed-with')
-                misp_event.Object.append(file_object)
+                misp_event.add_object(file_object)
                 hashes_expanded += [md5, sha1, sha256]
             else:
                 if not original_object_id or original_object_id == '0':
@@ -207,7 +207,7 @@ def check_hashes(self):
                     # We already have a MISP object, adding the link to the new VT object
                     file_object = misp_event.get_object_by_id(original_object_id)
                     file_object.add_reference(vt_object.uuid, 'analysed-with')
-            misp_event.Object.append(vt_object)
+            misp_event.add_object(vt_object)
 
         if cfg.virustotal.virustotal_has_private_key is False:
             if quota > 0:
