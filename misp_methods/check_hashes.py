@@ -163,7 +163,6 @@ def check_hashes(self):
     unk_vt_hashes = []
     if cfg.virustotal.virustotal_has_private_key is False:
         quota = 4
-        timeout = datetime.datetime.now() + datetime.timedelta(minutes=1)
 
     hashes_expanded += local_samples_hashes
     processed_on_vt = []
@@ -175,6 +174,18 @@ def check_hashes(self):
         original_attribute = hashes_to_expand[to_expand]
         if original_attribute.get('object_id'):
             original_object_id = original_attribute.get('object_id')
+
+        if cfg.virustotal.virustotal_has_private_key is False:
+            if quota > 0:
+                quota -= 1
+                timeout = datetime.datetime.now() + datetime.timedelta(minutes=1)
+            else:
+                waiting_time = (timeout - datetime.datetime.now()).seconds
+                if waiting_time > 0:
+                    self.log('warning', 'No private API key, 4 queries/min is the limit. Waiting for {} seconds.'.format(waiting_time))
+                    time.sleep(waiting_time)
+                quota = 3
+
         vt_object = self._make_VT_object(to_expand, original_attribute)
         if not vt_object:
             unk_vt_hashes.append(to_expand)
@@ -208,17 +219,6 @@ def check_hashes(self):
                     file_object = misp_event.get_object_by_id(original_object_id)
                     file_object.add_reference(vt_object.uuid, 'analysed-with')
             misp_event.add_object(vt_object)
-
-        if cfg.virustotal.virustotal_has_private_key is False:
-            if quota > 0:
-                quota -= 1
-            else:
-                waiting_time = (timeout - datetime.datetime.now()).seconds
-                if waiting_time > 0:
-                    self.log('warning', 'No private API key, 4 queries/min is the limit. Waiting for {} seconds.'.format(waiting_time))
-                    time.sleep(waiting_time)
-                quota = 4
-                timeout = datetime.datetime.now() + datetime.timedelta(minutes=1)
 
     if self.args.populate:
         self._populate(misp_event)
