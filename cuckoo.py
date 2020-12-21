@@ -61,7 +61,6 @@ class Cuckoo(Module):
             db.add(obj=obj, tags=tags, parent_sha=parent)
             return obj.sha256
 
-
     def api_query(self, api_method, api_uri, files=None, params=None):
         if cfg.cuckoo.cuckoo_modified:
             response = requests.post(api_uri, files=files, data=params,
@@ -69,7 +68,7 @@ class Cuckoo(Module):
         else:
             auth_headers = {'Authorization': "Bearer {0}".format(cfg.cuckoo.auth_token)}
             response = requests.post(api_uri, headers=auth_headers, files=files, data=params,
-                                         proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
+                                     proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
         if files:
             try:
                 response
@@ -143,9 +142,7 @@ class Cuckoo(Module):
                          api_status['data']['tasks']['total']
                          ]
             else:
-                api_status = self.api_query('get', status_url).json()
                 cuckoo_version = api_status['version']
-                self.log('item', "Version: {0}".format(cuckoo_version))
                 machines = '{0}/{1}'.format(api_status['machines']['available'],
                                             api_status['machines']['total']
                                             )
