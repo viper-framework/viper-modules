@@ -86,7 +86,7 @@ class Cuckoo(Module):
 
         if not files and api_method == 'get':
             if cfg.cuckoo.cuckoo_modified:
-                response = response = requests.get(api_uri, proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
+                response = requests.get(api_uri, proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
             else:
                 auth_headers = {'Authorization': "Bearer {0}".format(cfg.cuckoo.auth_token)}
                 response = requests.get(api_uri, headers=auth_headers, proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
