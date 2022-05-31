@@ -62,10 +62,16 @@ class Cuckoo(Module):
             return obj.sha256
 
     def api_query(self, api_method, api_uri, files=None, params=None):
+        if cfg.cuckoo.cuckoo_modified:
+            response = requests.post(api_uri, files=files, data=params,
+                                     proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
+        else:
+            auth_headers = {'Authorization': "Bearer {0}".format(cfg.cuckoo.auth_token)}
+            response = requests.post(api_uri, headers=auth_headers, files=files, data=params,
+                                     proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
         if files:
             try:
-                response = requests.post(api_uri, files=files, data=params,
-                                         proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
+                response
 
             except requests.ConnectionError:
                 self.log('error', "Unable to connect to Cuckoo API at '{0}'.".format(api_uri))
@@ -79,9 +85,14 @@ class Cuckoo(Module):
             return
 
         if not files and api_method == 'get':
+            if cfg.cuckoo.cuckoo_modified:
+                response = requests.get(api_uri, proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
+            else:
+                auth_headers = {'Authorization': "Bearer {0}".format(cfg.cuckoo.auth_token)}
+                response = requests.get(api_uri, headers=auth_headers, proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
             # GET from API
             try:
-                response = requests.get(api_uri, proxies=cfg.cuckoo.proxies, verify=cfg.cuckoo.verify, cert=cfg.cuckoo.cert)
+                response
             except requests.ConnectionError:
                 self.log('error', "Unable to connect to Cuckoo API at '{0}'.".format(api_uri))
                 return
